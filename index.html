@@ -106,7 +106,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6">
-        <iframe style="border:none;width:100%" id="doacao-para-o-grupo-rita-uzkpay" src="https://form.rafael.adm.br/forms/doacao-para-o-grupo-rita-uzkpay"></iframe>
+        <iframe style="border:none;width:100%" id="doacao-para-o-grupo-rita-uzkpay" src=""></iframe>
       </div>
       <div class="col p-5">
         <div class="text-center">
@@ -233,6 +233,22 @@
   <footer class="text-center text-white p-2">
     © Casa Espírita Cristã Maria de Nazaré.
   </footer>
-  <script type="text/javascript" onload="initEmbed('doacao-para-o-grupo-rita-uzkpay')" src="https://form.rafael.adm.br/widgets/iframe.min.js"></script>
+  <script>
+    function generateRandomUID() {
+      return Math.random().toString(36).substr(2, 9); // Base 36, 9 caracteres
+    }
+    function loadIframe() {
+      const frame = document.getElementById('doacao-para-o-grupo-rita-uzkpay');
+      const currentURL = new URL(window.location.href);
+      const frameURL = new URL('https://form.rafael.adm.br/forms/doacao-para-o-grupo-rita-uzkpay');
+      currentURL.searchParams.forEach((value, key) => {
+        frameURL.searchParams.set(key, value);
+      });
+      frameURL.searchParams.set('6afd5c71-5619-44fb-a843-f733aedcbece', generateRandomUID());
+      frame.src = frameURL.toString();
+      initEmbed('doacao-para-o-grupo-rita-uzkpay')
+    }
+  </script>
+  <script type="text/javascript" onload="loadIframe()" src="https://form.rafael.adm.br/widgets/iframe.min.js"></script>
 </body>
 </html>
