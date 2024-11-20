@@ -36,6 +36,12 @@
   header, footer {
     background: rgb(39,61,98);
   }
+  footer {
+    position: fixed; /* Fixa no viewport */
+    bottom: 0; /* Alinha ao fundo */
+    left: 0; /* Estende à esquerda */
+    width: 100%; /* Preenche toda a largura */
+  }
   h1,h2,h3,h4,h5,h6 {
     color: #00345A;
   }
