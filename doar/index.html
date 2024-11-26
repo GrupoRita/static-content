@@ -24,7 +24,7 @@
   <meta name="twitter:description" content="Completamos 60 anos em dezembro de 2021, e a casa que nasceu a partir de um gesto de amor ao próximo, hoje é uma sociedade civil sem fins lucrativos que conta com a ajuda de voluntários em quatro grandes frentes de trabalho, em prol do aperfeiçoamento moral e da caridade.">
   <meta name="twitter:image" content="https://g.rita.org.br/doar/og.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link href="https://g.rita.org.br/doar/style.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/490dad6fd3.js" crossorigin="anonymous"></script>
   <script>
@@ -52,10 +52,10 @@
     <img src="https://g.rita.org.br/doar/logo-rita.png" width="120" height="45" fetchpriority="high">
   </header>
   <div class="bglayer"></div>
-  <div class="container">
+  <div class="container hide" id="container">
     <div class="row">
       <div class="col-lg-6">
-        <iframe style="border:none;width:100%" id="doacao-para-o-grupo-rita-uzkpay" src=""></iframe>
+        <iframe style="border:none;width:100%" id="doacao-para-o-grupo-rita-uzkpay" src="loading.html"></iframe>
       </div>
       <div class="col p-5">
         <div class="text-center">
@@ -188,6 +188,9 @@
     }
     function loadIframe() {
       const frame = document.getElementById('doacao-para-o-grupo-rita-uzkpay');
+      frame.addEventListener('load', () => {
+        document.getElementById('container').classList.replace('hide', 'show');
+      });
       const currentURL = new URL(window.location.href);
       const frameURL = new URL('https://form.rafael.adm.br/forms/doacao-para-o-grupo-rita-uzkpay');
       currentURL.searchParams.forEach((value, key) => {
@@ -196,6 +199,7 @@
       frameURL.searchParams.set('6afd5c71-5619-44fb-a843-f733aedcbece', generateRandomUID());
       frame.src = frameURL.toString();
       initEmbed('doacao-para-o-grupo-rita-uzkpay')
+
     }
   </script>
   <script type="text/javascript" onload="loadIframe()" src="https://form.rafael.adm.br/widgets/iframe.min.js"></script>
