@@ -27,20 +27,6 @@
   <link href="style.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/490dad6fd3.js" crossorigin="anonymous"></script>
-  <script>
-    window.addEventListener("message", (event) => {
-      if (event.origin === "https://form.rafael.adm.br") {
-          const { action } = event.data;
-          if (action === "scrollTo") {
-            const { top, behavior } = event.data;
-            window.scrollTo({ top: top, behavior: behavior });
-          } else if(action === "redirect") {
-            const { url } = event.data;
-            window.location.href = url;
-          }
-      }
-    });
-  </script>
   <style>
     body {
       padding-bottom: 40px;
@@ -54,8 +40,8 @@
   <div class="bglayer"></div>
   <div class="container hide" id="container">
     <div class="row">
-      <div class="col-lg-6">
-        <iframe style="border:none;width:100%" id="doacao-para-o-grupo-rita-uzkpay" src="loading.html"></iframe>
+      <div class="col-lg-7">
+        <iframe style="border:none;width:100%" id="doacao-para-o-grupo-rita-c-cartao-sandbox-futoyu" src=""></iframe>
       </div>
       <div class="col p-5">
         <div class="text-center">
@@ -183,24 +169,53 @@
     © Casa Espírita Cristã Maria de Nazaré.
   </footer>
   <script>
+    async function getClientIP() {
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      return data.ip;
+    }
     function generateRandomUID() {
       return Math.random().toString(36).substr(2, 9); // Base 36, 9 caracteres
     }
-    function loadIframe() {
-      const frame = document.getElementById('doacao-para-o-grupo-rita-uzkpay');
-      frame.addEventListener('load', () => {
-        document.getElementById('container').classList.replace('hide', 'show');
-      });
+    function loadIframe(clientIP = '') {
+      console.log('IP:', clientIP);
+      const frame = document.getElementById('doacao-para-o-grupo-rita-c-cartao-sandbox-futoyu');
       const currentURL = new URL(window.location.href);
-      const frameURL = new URL('https://form.rafael.adm.br/forms/doacao-para-o-grupo-rita-uzkpay');
+      // const frameURL = new URL('https://form.rafael.adm.br/forms/doacao-para-o-grupo-rita-uzkpay');
+      const frameURL = new URL('https://form.rafael.adm.br/forms/doacao-para-o-grupo-rita-c-cartao-sandbox-futoyu');
       currentURL.searchParams.forEach((value, key) => {
         frameURL.searchParams.set(key, value);
       });
       frameURL.searchParams.set('6afd5c71-5619-44fb-a843-f733aedcbece', generateRandomUID());
+      frameURL.searchParams.set('895ea3ac-be32-4b1c-913f-439daf2b31b6', clientIP);
       frame.src = frameURL.toString();
-      initEmbed('doacao-para-o-grupo-rita-uzkpay')
-
+      initEmbed('doacao-para-o-grupo-rita-c-cartao-sandbox-futoyu');
     }
+
+    window.addEventListener("message", (event) => {
+      if (event.origin === "https://form.rafael.adm.br") {
+        const { action } = event.data;
+        if (action === "scrollTo") {
+          const { top, behavior } = event.data;
+          window.scrollTo({ top: top, behavior: behavior });
+        } else if(action === "redirect") {
+          const { url } = event.data;
+          window.location.href = url;
+        }
+      }
+    });
+
+    (function() {
+      const frame = document.getElementById('doacao-para-o-grupo-rita-c-cartao-sandbox-futoyu');
+      frame.addEventListener('load', () => {
+        document.getElementById('container').classList.replace('hide', 'show');
+      });
+    })();
+
+    (async() => {
+      let clientIP = await getClientIP();
+      loadIframe(clientIP);
+    })();
   </script>
   <script type="text/javascript" onload="loadIframe()" src="https://form.rafael.adm.br/widgets/iframe.min.js"></script>
 </body>
