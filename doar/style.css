@@ -47,6 +47,9 @@
     font-family: avenir-lt-w01_85-heavy1475544, avenir-lt-w05_85-heavy, sans-serif;
     color: #00345A;
   }
+  .card {
+    --bs-card-border-width: 0;
+  }
   .text-bg-primary {
     color: #fff !important;
     background-color: #00345A !important;
