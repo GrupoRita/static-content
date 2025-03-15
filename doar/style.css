@@ -38,6 +38,10 @@
   header, footer {
     background: rgb(39,61,98);
   }
+  header a, footer a {
+    color: #fff;
+    text-decoration: none;
+  }
   footer {
     position: fixed; /* Fixa no viewport */
     bottom: 0; /* Alinha ao fundo */
