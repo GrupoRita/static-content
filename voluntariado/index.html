@@ -33,7 +33,7 @@
   <script src="https://kit.fontawesome.com/490dad6fd3.js" crossorigin="anonymous"></script>
   <script>
     window.addEventListener("message", (event) => {
-      if (event.origin === "https://form.rafael.adm.br") {
+      if (event.origin === "https://form.openstacks.app") {
           const { action } = event.data;
           if (action === "scrollTo") {
             const { top, behavior } = event.data;
@@ -85,7 +85,7 @@
         document.getElementById('container').classList.replace('hide', 'show');
       });
       const currentURL = new URL(window.location.href);
-      const frameURL = new URL('https://form.rafael.adm.br/forms/bec11436-ceb4-4465-b610-777826187e5d');
+      const frameURL = new URL('https://form.openstacks.app/forms/bec11436-ceb4-4465-b610-777826187e5d');
       currentURL.searchParams.forEach((value, key) => {
         frameURL.searchParams.set(key, value);
       });
@@ -95,6 +95,6 @@
 
     }
   </script>
-  <script type="text/javascript" onload="loadIframe()" src="https://form.rafael.adm.br/widgets/iframe.min.js"></script>
+  <script type="text/javascript" onload="loadIframe()" src="https://form.openstacks.app/widgets/iframe.min.js"></script>
 </body>
 </html>

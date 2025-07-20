@@ -33,8 +33,8 @@
   <script src="https://kit.fontawesome.com/490dad6fd3.js" crossorigin="anonymous"></script>
   <script>
     window.addEventListener("message", (event) => {
-      if (event.origin === "https://form.rafael.adm.br") {
-          const { action } = event.data;
+      if (event.origin === "https://form.openstacks.app") {
+          const { action } = event.data;fo
           if (action === "scrollTo") {
             const { top, behavior } = event.data;
             window.scrollTo({ top: top, behavior: behavior });
