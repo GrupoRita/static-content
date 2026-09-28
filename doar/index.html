@@ -178,7 +178,13 @@
     window.addEventListener("message", (event) => {
       if (event.origin === "https://portal.rita.org.br") {
         if (event.data && event.data.type === "gruporita:iframe-height") {
-          document.getElementById('iframe-form').style.height = event.data.height + 'px';
+          const frame = document.getElementById('iframe-form');
+          const previousHeight = frame.offsetHeight;
+          frame.style.height = event.data.height + 'px';
+          // after submit the form shrinks and leaves the page scrolled past it
+          if (previousHeight - frame.offsetHeight > 200 && frame.getBoundingClientRect().top < 0) {
+            frame.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
           return;
         }
         const { action } = event.data;
