@@ -31,6 +31,7 @@
   <link href="style.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/490dad6fd3.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js" defer></script>
   <style>
     body {
       padding-bottom: 40px;
@@ -175,6 +176,17 @@
     </div>
   </footer>
   <script>
+    // same bursts the portal fires; inside the iframe the canvas would be stuck to the form column
+    function celebrate() {
+      if (typeof confetti !== 'function') return;
+      const defaults = { spread: 80, ticks: 220, gravity: 0.9, decay: 0.94, startVelocity: 38, zIndex: 9999, scalar: 1.05 };
+      confetti({ ...defaults, particleCount: 120, angle: 60, origin: { x: 0, y: 0.85 } });
+      confetti({ ...defaults, particleCount: 120, angle: 120, origin: { x: 1, y: 0.85 } });
+      setTimeout(() => {
+        confetti({ ...defaults, particleCount: 80, angle: 90, spread: 120, origin: { x: 0.5, y: 0.7 } });
+      }, 250);
+    }
+
     window.addEventListener("message", (event) => {
       if (event.origin === "https://portal.rita.org.br") {
         if (event.data && event.data.type === "gruporita:iframe-height") {
@@ -183,6 +195,10 @@
         }
         if (event.data && event.data.type === "gruporita:scroll-to-top") {
           document.getElementById('iframe-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+        if (event.data && event.data.type === "gruporita:celebrate") {
+          celebrate();
           return;
         }
         const { action } = event.data;
