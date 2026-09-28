@@ -1,0 +1,15 @@
+doar/index.html
+  h_fb825fd7406a86 179,199,201,206-207
+  h_fb825fd7406a86 196-198,200,202-205
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "6b3aec62659759bad79273f74ad395844ce987e5",
+  "prompts": {},
+  "humans": {
+    "h_fb825fd7406a86": {
+      "author": "Rafael Lima <contato@rafael.adm.br>"
+    }
+  }
+}
