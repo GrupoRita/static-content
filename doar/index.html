@@ -46,7 +46,7 @@
   <div class="container hide" id="container">
     <div class="row">
       <div class="col-lg-6">
-        <iframe style="border:none;width:100%" id="iframe-form" src=""></iframe>
+        <iframe style="border:none;width:100%;min-height:600px" id="iframe-form" src=""></iframe>
       </div>
       <div class="col p-5">
         <div class="text-center">
@@ -176,7 +176,11 @@
   </footer>
   <script>
     window.addEventListener("message", (event) => {
-      if (event.origin === "https://portal.rita.") {
+      if (event.origin === "https://portal.rita.org.br") {
+        if (event.data && event.data.type === "gruporita:iframe-height") {
+          document.getElementById('iframe-form').style.height = event.data.height + 'px';
+          return;
+        }
         const { action } = event.data;
         if (action === "scrollTo") {
           const { top, behavior } = event.data;
@@ -192,6 +196,7 @@
       const frame = document.getElementById('iframe-form');
       frame.addEventListener('load', () => {
         document.getElementById('container').classList.replace('hide', 'show');
+        frame.contentWindow.postMessage({ type: 'gruporita:request-iframe-height' }, 'https://portal.rita.org.br');
       });
       const currentURL = new URL(window.location.href);
       let frameURL = null;
